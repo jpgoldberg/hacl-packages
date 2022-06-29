@@ -29,7 +29,8 @@
         "utility": "cpp",
         "vector": "cpp",
         "span": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "config.h": "c"
     },
     "python.pythonPath": "/opt/homebrew/bin/python3",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
