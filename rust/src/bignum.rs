@@ -439,6 +439,7 @@ pub enum ModulusError {
 /// as additional precautions.
 ///
 /// [mutability]: #a-note-on-functional-mutability
+#[derive(Debug)]
 pub struct BigUInt(Bui);
 
 /// A modulus is a [BigUInt] that is to be used as a modulus for
@@ -1117,7 +1118,7 @@ impl BigUInt {
     /// but is needed for some
     /// precomputation in some cases and we do not wish to preform that computation
     /// repeatedly.
-    pub fn modadd(mut self, a: &mut Self, b: &mut Self) -> Result<Self, Error> {
+    pub fn modadd(&mut self, a: &mut Self, b: &mut Self) -> Result<Self, Error> {
         if a.is_zero() {
             return b.try_clone();
         }
@@ -1131,8 +1132,8 @@ impl BigUInt {
         // HACL notes say the caller is responsible for ensuring
         // that a < n and b < n.
         // This is where we take on our responsibility
-        let a = a.mod_reduce(&mut self)?;
-        let b = b.mod_reduce(&mut self)?;
+        let a = a.mod_reduce(self)?;
+        let b = b.mod_reduce(self)?;
 
         let result_handle = HaclBnHandle::new(BN_BITSIZE)?;
 

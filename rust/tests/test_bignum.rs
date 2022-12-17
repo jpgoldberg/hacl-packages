@@ -180,10 +180,10 @@ fn test_memleak() {
         data.fill(0);
 
         small_rng.fill_bytes(&mut data[..]);
-        let mut a = BigUInt::from_bytes_be(data).unwrap();
+        let a = BigUInt::from_bytes_be(data).unwrap();
 
         small_rng.fill_bytes(&mut data[..]);
-        let mut b = BigUInt::from_bytes_be(data).unwrap();
+        let b = BigUInt::from_bytes_be(data).unwrap();
 
         small_rng.fill_bytes(&mut data[..]);
         // we need to moduli to be odd
@@ -206,8 +206,8 @@ fn test_memleak() {
 
         assert!(true_count == 1, "We have the wrong number of truths.");
 
-        let ra = m.reduce(&mut a).unwrap();
-        let rb = m.reduce(&mut b).unwrap();
+        let ra = m.reduce(&a).unwrap();
+        let rb = m.reduce(&b).unwrap();
 
         assert!(ra <= a);
         assert!(rb <= b);
@@ -419,6 +419,7 @@ fn test_modpow_big() {
 
     assert!(result == expected);
 }
+
 
 #[test]
 fn test_mont_modpow_big() {
